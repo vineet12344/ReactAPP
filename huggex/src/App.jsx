@@ -110,6 +110,22 @@ const [isFlipped,setIsFlipped] = useState(false);
               </span>
             </div>
           </div>
+
+          <div onClick={() => {setIsFlipped(!isFlipped)}} className="Card icon_container bg-flipped-card-custom border-none cursor-pointer rounded-[3rem] w-[712px] flex flex-col  h-[393px] border border-solid border-emerald-950 p-7">
+            <div className=" flex justify-between w-full  text-red-800">
+              <div>
+                <img src={Light} alt="Bulb" />
+              </div>
+              <div>
+                <img src={Speaker} alt="Speaker" />
+              </div>
+            </div>
+            <div className="card_Text  flex justify-center items-center h-full text-[#fff]">
+              <span className="font-bold text-[38px] ">
+                5x + 12
+              </span>
+            </div>
+          </div>
          </ReactCardFlip>
 
         
