@@ -14,8 +14,38 @@ import Maximize from "./assets/Maximize.svg";
 import CompanyIcon from "./assets/CompanyIcon.svg";
 import PlusIcon from "./assets/Plus.svg";
 import FaqQuestion from "./Components/FaqQuestion";
+import ReactCardFlip from 'react-card-flip'; 
+import { useState } from "react";
+
+
+
+const questions = [
+  {
+    id: 1,
+    question: "Can education flashcards be used for all age groups?",
+    answer:
+      "Yes Education can be talored to different age groups and learning levels.There are flashcards designed for preschoolers , elementry school students,high school students,and even for college-level and adult learners",
+  },
+  {
+    id: 2,
+    question: "How do Education FlashCards Work?",
+    answer:
+      "Education Flashcards works by presenting a one side and corresponding answer or information on the other side.User can review the card repeatedly reinforcing their memory and enhancing learning through repetition ",
+  },
+  {
+    id: 3,
+    question: "Can Gaming flashcards be used to test preparation?",
+    answer:
+      "Absolutely. FlashCards are excellent tool for test preparation , allowing students to review key concepts ,terms and facts.They privide a quick and focused way to reinforce knowledge before exams.",
+  },
+];
+
+
 
 function App() {
+const [isFlipped,setIsFlipped] = useState(false);
+
+
   return (
     <>
       <div className="Nav_Bar_Container  w-full h-full">
@@ -61,22 +91,30 @@ function App() {
           <li className="text-[#696671]">Others</li>
         </ul>
       </div>
-      <div className="Card-Container flex flex-col gap-[32px]   items-center justify-center w-full h-[500px]">
-        <div className="Card bg-gradient-custom border-none rounded-[3rem] w-[712px] flex flex-col  h-[393px] border border-solid border-emerald-950 p-7">
-          <div className="icon_container flex justify-between w-full  text-red-800">
-            <div>
-              <img src={Light} alt="Bulb" />
-            </div>
-            <div>
-              <img src={Speaker} alt="Speaker" />
-            </div>
-          </div>
-          <div className="card_Text flex justify-center items-center h-full text-[#fff]">
-            <span className="font-bold text-[38px] ">9 + 6 + 7x - 2x - 3</span>
-          </div>
-        </div>
+     
+       <div className="Card-Container flex flex-col gap-[32px]   items-center justify-center w-full h-[500px]">
+         <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
 
-        <div className="cardOPtions w-[712px] flex items-center flex-row gap-7 justify-around">
+          <div onClick={() => {setIsFlipped(!isFlipped)}} className="Card bg-gradient-custom border-none cursor-pointer rounded-[3rem] w-[712px] flex flex-col  h-[393px] border border-solid border-emerald-950 p-7">
+            <div className="icon_container flex justify-between w-full  text-red-800">
+              <div>
+                <img src={Light} alt="Bulb" />
+              </div>
+              <div>
+                <img src={Speaker} alt="Speaker" />
+              </div>
+            </div>
+            <div className="card_Text flex justify-center items-center h-full text-[#fff]">
+              <span className="font-bold text-[38px] ">
+                9 + 6 + 7x - 2x - 3
+              </span>
+            </div>
+          </div>
+         </ReactCardFlip>
+
+        
+
+          <div className="cardOPtions w-[712px] flex items-center flex-row gap-7 justify-around">
           <div className="ReplayButtonContainer ">
             <img src={ReplayBtn} alt="Replay" />
           </div>
@@ -118,10 +156,16 @@ function App() {
           </span>
         </div>
 
-        <div className="FAQQuestons">
-          <div className="QuestionContainer px-17  border">
-            <FaqQuestion />
-          </div>
+        <div className="h-96">
+          {questions.map((Q) => {
+            return (
+              <div key={Q.id} className="FAQQuestons mb-7 inline-block  ">
+                <div className="QuestionContainer px-17 h-[58px] w-[848px] p-2   ">
+                  <FaqQuestion question={Q.question} answer={Q.answer} />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
